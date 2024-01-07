@@ -1,43 +1,50 @@
-/* body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f0f0f0;
-  }
+@import url(https://fonts.googleapis.com/css?family=Exo+2:200i);
+
+body {
+  margin: auto;
+  width: 640px; 
+  padding: 10px;
+  font-family: 'Lexend Deca', sans-serif; 
+  color: #2E475D;    
+  background-color: #dcd6b4;
+}
+
+
+
+  .rounded-box {
+    border: 2px solid #ffffff; /* Border color similar to other elements */
+    border-radius: 15px; /* Rounded corners */
+    padding: 35px; /* Padding inside the box */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
+    background-color: #bab59a; /* Background color */
+    margin-top: 85px; /* Margin at the top */
+}
+
   
-  .RegisterPage {
+
+
+  .header {
     text-align: center;
-    width: 350px;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-  } */
-  
-  .register-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f0f0f0;
-  }
-  
-  .RegisterPage {
+    font-size: 80px;
+    margin-bottom: 0%;
+    color: #2E475D;
+    font-family: 'Lexend Deca', sans-serif;
+}
+
+h1 {
     text-align: center;
-    width: 350px;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-  }
+    font-size: 50px;
+    margin-bottom: 0%;
+    color: #2E475D;
+    font-family: 'Lexend Deca', sans-serif;
+}
 
   form {
     display: flex;
     flex-direction: column;
-  }
+    width: 400px;
+    margin-top: 20px;
+}
   
   label {
     margin-top: 15px;
@@ -46,46 +53,61 @@
   }
   
   input {
-    margin-top: 8px;
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin: 10px 0;
+    font-family: 'Lexend Deca', sans-serif;
+}
+
+input:focus {
+    outline: none;
+    border-color: #2E475D;
+    box-shadow: 0 0 10px #2E475D;
+}
   
   /* Style for the confirmPassword input when passwords don't match */
   input.confirmPasswordError {
     border-color: red;
   }
+
   
-  /* button {
-    margin-top: 20px;
-    padding: 12px;
+  button { 
+    margin: 10px 0;
+    padding: 10px 30px;
+    background-color: transparent;
+    border: 3px solid #2E475D;
+    border-radius: 10px;
+    color: #2E475D;
+    font-size: 20px;
+    font-family: 'Lexend Deca', sans-serif;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+}
+
+button:hover {
     cursor: pointer;
-    background-color: #3498db;
+    box-shadow: 0 0 10px 2px#2E475D;
+  }
+
+button:disabled {
+    background-color: #bab59a;
+    border-color: #bab59a;
     color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
+    cursor: not-allowed;
   }
-  
-  button:hover {
-    background-color: #2980b9;
-  } */
-  
-  .RegisterPage button {
-    margin-top: 20px;
-    padding: 12px;
-    cursor: pointer;
-    background-color: #3498db; /* Your desired button color */
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .RegisterPage button:hover {
-    background-color: #2980b9; /* Color change on hover */
-  }
+
+.button-container{
+    margin-top: 5%;
+    display: flex;
+    justify-content: center;
+    gap : 160px;
+} 
+
+div {
+  margin-bottom: 10px;
+}
+
+label {
+  margin-bottom: 20px;
+}

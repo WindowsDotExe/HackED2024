@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { auth } from '../firebase'; // Assuming auth is correctly initialized in your firebase config
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import './Register.css';
@@ -19,6 +19,16 @@ function RegisterPage() {
   });
 
   const [passwordError, setPasswordError] = useState(false);
+
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  useEffect(() => {
+    const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email);
+    const isNameValid = formData.name.length >= 2;
+    const isPasswordValid = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(formData.password);
+
+    setIsFormValid(isEmailValid && isNameValid && isPasswordValid && formData.password === formData.confirmPassword);
+  }, [formData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -54,54 +64,56 @@ function RegisterPage() {
         });
 
         console.log('User registered successfully');
+        
         navigate('/login'); // Replace with your preferences route
     } catch (error) {
         console.log("Error registering user: ", error.message);
+        
     }
 
   };
 
   return (
-    <div className="register-container"> {/* Wrapper div added */}
-      <div className="RegisterPage">
-        <h2>Sign Up</h2>
+    <div className="rounded-box"> {/* Wrapper div added */}
+      <div className="header">
+      <link href='https://fonts.googleapis.com/css?family=Lexend Deca' rel='stylesheet'></link>
+        <h1>Register for ByteSwipe</h1>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="name">Name:</label>
           <input
             type="text"
             id="name"
             name="name"
+            placeholder='John Doe'
             value={formData.name}
             onChange={handleChange}
             required
           />
-
-          <label htmlFor="email">Email:</label>
           <input
             type="email"
             id="email"
             name="email"
+            placeholder = 'johnDoe@byteswipe.org'
             value={formData.email}
             onChange={handleChange}
             required
           />
 
-          <label htmlFor="password">Password:</label>
           <input
             type="password"
             id="password"
             name="password"
+            placeholder='Atleast 8 characters, 1 digit, 1 special, 1 uppercase '
             value={formData.password}
             onChange={handleChange}
             required
             className={passwordError ? 'confirmPasswordError' : ''}
           />
 
-          <label htmlFor="confirmPassword">Confirm Password:</label>
           <input
             type="password"
             id="confirmPassword"
             name="confirmPassword"
+            placeholder='Confirm Password'
             value={formData.confirmPassword}
             onChange={handleChange}
             required
@@ -110,8 +122,9 @@ function RegisterPage() {
 
         {passwordError && <div className="error-message">Passwords do not match</div>}
 
-
-          <button type="submit">Register</button>
+        <div className='button-container'>
+          <button type="submit" disabled={!isFormValid}>Register</button>
+        </div>
         </form>
       </div>
     </div>
