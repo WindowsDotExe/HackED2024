@@ -510,7 +510,6 @@ function Feed() {
             </div>
 
             <div className="comments-section">
-                {comments}
                 {comments
                     .filter(comment => comment.article === currentArticleIndex) // Filter comments for the current article
                     .map((comment) => (
