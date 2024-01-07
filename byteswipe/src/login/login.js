@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { auth } from '../firebase'; // Importing the named export 'auth'
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, setPersistence, browserLocalPersistence, onAuthStateChanged, signOut } from 'firebase/auth';
 import './login.css';
 
 const Login = () => {
@@ -13,6 +13,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            await setPersistence(auth, browserLocalPersistence);
             // Firebase authentication with email and password
             await signInWithEmailAndPassword(auth, email, password);
             console.log('User logged in successfully!');
@@ -21,25 +22,77 @@ const Login = () => {
             console.error('Login failed: ', error.message);
             // Handle login errors here (e.g., user not found, wrong password)
         }
+
+    };
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                console.log('User is logged in:', user);
+            } else {
+                console.log('No user is logged in');
+            }
+        });
+
+        // Cleanup subscription on unmount
+        return () => unsubscribe();
+    }, []);
+
+    const handleLogout = async () => {
+        try {
+            await signOut(auth);
+            console.log('User logged out successfully!');
+            // Perform any additional actions after logout if necessary
+        } catch (error) {
+            console.error('Logout failed: ', error.message);
+            // Handle logout errors here
+        }
     };
 
     return (
+        <div className="header">
+        <h1>ByteSwipe</h1>
         <form onSubmit={handleSubmit}>
             <input
                 type="text"
-                placeholder="Email address"
+                placeholder="email"
                 value={email}
                 onChange={handleEmailChange}
             />
             <input
                 type="password"
-                placeholder="Password"
+                placeholder="password"
                 value={password}
                 onChange={handlePasswordChange}
             />
-            <button type="submit">Login</button>
+            <div className='button-container'>
+                <button > Submit </button>
+            </div>
         </form>
+    </div>
     );
+
+    // return (
+    //     <form onSubmit={handleSubmit}>
+    //         <h2>Login</h2>
+    //         <input
+    //             type="text"
+    //             placeholder="Email address"
+    //             value={email}
+    //             onChange={handleEmailChange}
+    //         />
+    //         <input
+    //             type="password"
+    //             placeholder="Password"
+    //             value={password}
+    //             onChange={handlePasswordChange}
+    //         />
+    //         <button type="submit">Login</button>
+    //         <button type="button" onClick={handleLogout}>Logout</button> {/* Logout button FOR TESTING ONLY */}
+    //     </form>
+    // );
+    
+
 }
 
 export default Login;
