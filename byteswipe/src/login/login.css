@@ -90,3 +90,9 @@ button:hover {
     margin-top: 85px; /* Margin at the top */
 }
 
+.error {
+    color: #ff0000; /* Red color for errors */
+    font-size: 16px; /* Adjust as needed */
+    margin: 10px 0; /* Spacing around the error message */
+    text-align: center; /* Center align the error message */
+}

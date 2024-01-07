@@ -7,6 +7,8 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const [error, setError] = useState(null); // State variable for error messages
+
     const handleEmailChange = (e) => setEmail(e.target.value);
     const handlePasswordChange = (e) => setPassword(e.target.value);
 
@@ -17,9 +19,11 @@ const Login = () => {
             // Firebase authentication with email and password
             await signInWithEmailAndPassword(auth, email, password);
             console.log('User logged in successfully!');
+            setError(null)
             // Redirect to your home page or dashboard here
         } catch (error) {
             console.error('Login failed: ', error.message);
+            setError('Login failed! Please check your email and password.');
             // Handle login errors here (e.g., user not found, wrong password)
         }
 
@@ -54,6 +58,7 @@ const Login = () => {
         <div className="header">
         <link href='https://fonts.googleapis.com/css?family=Lexend Deca' rel='stylesheet'></link>
         <h1>Login to ByteSwipe</h1>
+        {error && <p className="error">{error}</p>}
         <form onSubmit={handleSubmit}>
             <input
                 type="text"
