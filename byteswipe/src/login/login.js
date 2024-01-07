@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { auth } from '../firebase'; // Importing the named export 'auth'
 import { signInWithEmailAndPassword, setPersistence, browserLocalPersistence, onAuthStateChanged, signOut } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { getFirestore, doc, getDoc } from 'firebase/firestore'; // Import getDoc
 import './login.css';
 
 const Login = () => {
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -20,7 +23,8 @@ const Login = () => {
             await signInWithEmailAndPassword(auth, email, password);
             console.log('User logged in successfully!');
             setError(null)
-            // Redirect to your home page or dashboard here
+            // Redirect to feed
+            navigate('/feed');
         } catch (error) {
             console.error('Login failed: ', error.message);
             setError('Login failed! Please check your email and password.');
@@ -41,17 +45,6 @@ const Login = () => {
         // Cleanup subscription on unmount
         return () => unsubscribe();
     }, []);
-
-    const handleLogout = async () => {
-        try {
-            await signOut(auth);
-            console.log('User logged out successfully!');
-            // Perform any additional actions after logout if necessary
-        } catch (error) {
-            console.error('Logout failed: ', error.message);
-            // Handle logout errors here
-        }
-    };
 
     return (
         <div className='rounded-box'>

@@ -23,10 +23,11 @@ function SignupPreferences() {
                 if (docSnap.exists() && docSnap.data().isSelectingPreferences) {
                     setIsSelectingPreferences(true);
                 } else {
-                    navigate('/');
+                    navigate('/signup-preferences'); //
+                    setIsSelectingPreferences(false);
                 }
             } else {
-                navigate('/');
+                navigate('/login');
             }
             fetchCategories();
             setIsLoading(false);
@@ -129,6 +130,7 @@ function SignupPreferences() {
     onClick={() => {
         disableUserSelectingPreferences();
         addPreferenceCategories();
+        navigate('/feed');
     }}
 >
     Next
