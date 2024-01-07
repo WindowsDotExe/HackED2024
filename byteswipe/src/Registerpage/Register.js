@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
-import { auth } from '../firebase'; // Importing the named export 'auth'
-import { createUserWithEmailAndPassword, setPersistence, browserLocalPersistence, onAuthStateChanged, signOut } from 'firebase/auth';import './Register.css';
+import { auth } from '../firebase'; // Assuming auth is correctly initialized in your firebase config
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import './Register.css';
+import { getFirestore, doc, setDoc } from 'firebase/firestore'; // Import doc and setDoc here
+import { useNavigate } from 'react-router-dom';
+
 
 function RegisterPage() {
+  const db = getFirestore();
+  const navigate = useNavigate()
+
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -32,8 +40,21 @@ function RegisterPage() {
       }
 
     try {
-        await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+        // await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+        const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+        const user = userCredential.user;
+
+        // add user to users collection in firestore
+        const userRef = doc(db, 'users', user.uid);
+        await setDoc(userRef, {
+            name: formData.name,
+            email: formData.email,
+            isSelectingPreferences: true,
+            preferences: []
+        });
+
         console.log('User registered successfully');
+        navigate('/login'); // Replace with your preferences route
     } catch (error) {
         console.log("Error registering user: ", error.message);
     }
