@@ -6,8 +6,13 @@ function Homepage() {
     const navigate = useNavigate();
 
     const navigateToLogin = () => {
-        navigate('/login'); // The path you set for your login route
+        navigate('/login');
     };
+
+    const navigateToRegister = () => {
+        navigate('/register');
+    }
+
     return (
         <div className="homepage-container">
             <link href='https://fonts.googleapis.com/css?family=Lexend Deca' rel='stylesheet'></link>
@@ -21,8 +26,8 @@ function Homepage() {
             <h2> This is dummy text. This is more dummy text. This is more dummy text. </h2>
             
             <div className='button-container'>
-                <button > Register </button>
-                <button onClick={navigateToLogin}> Login </button>
+                <button onClick={navigateToRegister}>Register</button>
+                <button onClick={navigateToLogin}>Login</button>
             </div>
         
         </div>
