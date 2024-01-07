@@ -35,6 +35,91 @@ function Feed() {
         mode: 'cors',
     };
 
+
+
+
+
+
+
+
+
+
+
+
+    useEffect(() => {
+        const fetchCardData = async () => {
+            try {
+                const docRef = doc(db, 'cardsCollection', 'yourDocumentId');
+                const docSnap = await getDoc(docRef);
+                
+                if (docSnap.exists()) {
+                    const cardData = docSnap.data();
+                    // Update the card content state with data fetched from Firestore
+                    setCardContent({
+                        heading: cardData.heading,
+                        content: cardData.content,
+                        audio: cardData.audio,
+                        url: cardData.url
+                    });
+                } else {
+                    console.log('No such document!');
+                }
+            } catch (error) {
+                console.error('Error fetching document:', error);
+            }
+        };
+    
+        fetchCardData();
+    }, [db]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    const [cardContent, setCardContent] = useState({
+        heading: "Sample Card Heading",
+        content: "This is some sample content for the card.",
+        audio: "path_to_sample_audio.mp3", // Replace with an actual audio file path
+        url: "https://example.com"
+    });
+
+
+    // Within your component, you can create a function to update the card content
+    const updateCardContent = () => {
+        // Example new content
+        const newContent = {
+            heading: "New Heading",
+            content: "This is the updated content for the card.",
+            audio: "path_to_updated_audio.mp3",
+            url: "https://updated_example.com"
+        };
+
+        // Update state to reflect the new content
+        setCardContent(newContent);
+    };
+
+
+
+
+
+
+
+
+
+
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
             if (user) {
@@ -167,12 +252,14 @@ function Feed() {
 
             <div className="cards-container">
                 <CardComponent
-                    heading={sampleHeading}
-                    content={sampleContent}
-                    audio={sampleAudio}
-                    url={sampleUrl}
+                    heading={cardContent.heading}
+                    content={cardContent.content}
+                    audio={cardContent.audio}
+                    url={cardContent.url}
                 />
             </div>
+
+            <button onClick={updateCardContent}>Next Post</button>
 
             {/* Render your preferences or other components based on preferences */}
             <button className="signout-button" onClick={handleSignOut}>Signout</button>
