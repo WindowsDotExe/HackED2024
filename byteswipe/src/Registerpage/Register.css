@@ -1,0 +1,91 @@
+/* body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+  }
+  
+  .RegisterPage {
+    text-align: center;
+    width: 350px;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  } */
+  
+  .register-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+  }
+  
+  .RegisterPage {
+    text-align: center;
+    width: 350px;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    margin-top: 15px;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  input {
+    margin-top: 8px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Style for the confirmPassword input when passwords don't match */
+  input.confirmPasswordError {
+    border-color: red;
+  }
+  
+  /* button {
+    margin-top: 20px;
+    padding: 12px;
+    cursor: pointer;
+    background-color: #3498db;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #2980b9;
+  } */
+  
+  .RegisterPage button {
+    margin-top: 20px;
+    padding: 12px;
+    cursor: pointer;
+    background-color: #3498db; /* Your desired button color */
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .RegisterPage button:hover {
+    background-color: #2980b9; /* Color change on hover */
+  }
