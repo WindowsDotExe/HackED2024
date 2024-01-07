@@ -1,5 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Exo+2:200i);
-  
+
 .logo-container {
 
     padding-top: 20%;
@@ -32,12 +32,6 @@
     100% { fill: #2E475D; fill-opacity: 1; }
   }
 
-/* 
-h1 {
-    text-align: center;
-    font-size: 125px;
-    margin-bottom: 0%;
-} */
 
 h2 {
     margin-top: 5%;
@@ -45,14 +39,14 @@ h2 {
 
     }
     
-body {
-    margin: auto;
-    width: 640px; 
-    padding: 10px;
-    font-family: 'Lexend Deca', sans-serif; 
-    color: #2E475D;    
-    background-color: #dcd6b4;
-}
+    body {
+      margin: auto;
+      width: 640px; 
+      padding: 10px;
+      font-family: 'Lexend Deca', sans-serif; 
+      color: #2E475D;    
+      background-color: #dcd6b4;
+    }
 
 
 button { 
