@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import Login from './login/login';
 import reportWebVitals from './reportWebVitals';
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
@@ -27,18 +27,21 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-let db = getFirestore(app);
+// const db = getFirestore(app);
 
-const categoriesRef = db.collection('categories');
+// const categoriesRef = db.collection('categories');
 
-let query = categoriesRef.where('name', '==', 'Technology').get();
+// let query = categoriesRef.where('name', '==', 'Technology').get();
 
-alert(query);
+// alert(query);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <div className="header">
+      <h1>ByteSwipe</h1>
+    </div>
+    <Login />
   </React.StrictMode>
 );
 
