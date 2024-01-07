@@ -50,8 +50,10 @@ const Login = () => {
     };
 
     return (
+        <div className='rounded-box'>
         <div className="header">
-        <h1>ByteSwipe</h1>
+        <link href='https://fonts.googleapis.com/css?family=Lexend Deca' rel='stylesheet'></link>
+        <h1>Login to ByteSwipe</h1>
         <form onSubmit={handleSubmit}>
             <input
                 type="text"
@@ -69,7 +71,7 @@ const Login = () => {
                 <button > Submit </button>
             </div>
         </form>
-    </div>
+    </div></div>
     );
 
     // return (
