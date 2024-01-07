@@ -338,7 +338,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
-import { collection, getFirestore, query, where, getDocs, addDoc } from 'firebase/firestore';
+import { collection, getFirestore, query, doc, getDoc, where, getDocs, addDoc } from 'firebase/firestore';
 import CardComponent from '../components/CardComponent';
 import CommentComponent from '../components/CommentComponent';
 import './feed.css';
@@ -355,6 +355,8 @@ function Feed() {
     const [articles, setArticles] = useState([]);
     const [newComment, setNewComment] = useState('');
 
+    const [currentArticleIndex, setCurrentArticleIndex] = useState(0);
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
             if (user) {
@@ -368,13 +370,41 @@ function Feed() {
         return unsubscribe;
     }, [auth, navigate]);
 
-    useEffect(() => {
-        fetchComments();
-    }, []);
-
     const fetchComments = useCallback(async () => {
         // Fetch comments logic here
-    }, []);
+        const commentsRef = collection(db, 'comments');
+        const q = query(commentsRef, where('article', '==', articleId));
+        const querySnapshot = await getDocs(q);
+    
+        const commentsWithUserNames = await Promise.all(querySnapshot.docs.map(async (commentDoc) => {
+            const commentData = commentDoc.data();
+    
+            let authorName = 'Unknown';
+            let date = commentData.datePosted || 'Unknown date'; // Use the datePosted directly
+    
+            if (commentData.by) {
+                const userDocRef = doc(db, 'users', commentData.by);
+                const userDocSnap = await getDoc(userDocRef);
+                if (userDocSnap.exists()) {
+                    authorName = userDocSnap.data().name || authorName;
+                }
+            }
+    
+            return {
+                id: commentDoc.id,
+                content: commentData.content || '',
+                authorId: commentData.by || '',
+                authorName,
+                date
+            };
+        }));
+    
+        setComments(commentsWithUserNames);
+    }, [db, articleId]);
+
+    useEffect(() => {
+        fetchComments();
+    }, [fetchComments]);
 
     useEffect(() => {
         fetchNews();
@@ -431,7 +461,7 @@ function Feed() {
             
                     try {
                         await addDoc(commentsRef, {
-                            article: articleId,
+                            article: currentArticleIndex,
                             by: user.uid,
                             content: comment,
                             datePosted: date
@@ -459,12 +489,15 @@ function Feed() {
 
             {articles.map((article, index) => (
                 <CardComponent
-                    key={index}
-                    heading={article.title}
-                    content={article.description}
-                    url={article.url}
+                    key={currentArticleIndex}
+                    heading={articles[currentArticleIndex].title}
+                    content={articles[currentArticleIndex].description}
+                    url={articles[currentArticleIndex].url}
                 />
-            ))}
+              ))[0]}
+
+            <button onClick={() => setCurrentArticleIndex(prevIndex => prevIndex - 1)}>Previous Article</button>
+            <button onClick={() => setCurrentArticleIndex(prevIndex => prevIndex + 1)}>Next Article</button>
 
             <h3>Comments:</h3>
             <div className="comment-form">
@@ -477,16 +510,19 @@ function Feed() {
             </div>
 
             <div className="comments-section">
-                {comments.map((comment, index) => (
-                    <CommentComponent
-                        key={index}
-                        authorName={comment.authorName}
-                        content={comment.content}
-                        date={comment.date}
-                    />
-                ))}
+                {comments}
+                {comments
+                    .filter(comment => comment.article === currentArticleIndex) // Filter comments for the current article
+                    .map((comment) => (
+                        <CommentComponent
+                            key={currentArticleIndex}
+                            authorName={comment.authorName}
+                            content={comment.content}
+                            date={comment.date}
+                        />
+                    ))}
+                </div>
             </div>
-        </div>
     );
 }
 
