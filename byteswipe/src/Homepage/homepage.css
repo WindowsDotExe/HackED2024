@@ -1,27 +1,58 @@
 @import url(https://fonts.googleapis.com/css?family=Exo+2:200i);
+  
+.logo-container {
 
-/* CSS Centering Code with the h2 Selector "*" */ 
+    padding-top: 20%;
+    justify-content: center;
+    display: flex;
+}
 
+  .text-line {
+    stroke-dasharray: 500;
+    stroke-dashoffset: 500;
+    animation: dash 2.5s linear forwards, filling 2.5s ease-in forwards;
+    font-size: 120px;
+  }
+  
+  .text-line text {
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    
+  }
+  
+  @keyframes dash {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  
+  @keyframes filling {
+    0%, 90% { fill: #2E475D; fill-opacity: 0; }
+    100% { fill: #2E475D; fill-opacity: 1; }
+  }
 
+/* 
 h1 {
     text-align: center;
     font-size: 125px;
     margin-bottom: 0%;
-}
+} */
+
 h2 {
     margin-top: 5%;
     text-align: center;
 
     }
     
-    body {
-      margin: auto;
-      width: 640px; 
-      padding: 10px;
-      font-family: 'Lexend Deca', sans-serif; 
-      color: #2E475D;    
-      background-color: #dcd6b4;
-    }
+body {
+    margin: auto;
+    width: 640px; 
+    padding: 10px;
+    font-family: 'Lexend Deca', sans-serif; 
+    color: #2E475D;    
+    background-color: #dcd6b4;
+}
 
 
 button { 
