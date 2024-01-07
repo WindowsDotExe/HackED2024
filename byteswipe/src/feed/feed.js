@@ -2,7 +2,9 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import { collection, getFirestore, query, doc, getDoc, where, getDocs, addDoc } from 'firebase/firestore';
+import CardComponent from '../components/CardComponent';
 import CommentComponent from '../components/CommentComponent';
+
 import './feed.css';
 
 function Feed() {
@@ -16,6 +18,22 @@ function Feed() {
     const articleId = 'P1vFgA5BKRXsXhgkpkjE'; // HARDCODED ONLY FOR TESTING
     const [newComment, setNewComment] = useState(''); // Add a state for the new comment text
 
+    // Sample data for CardComponent props
+    const sampleHeading = "Sample Card Heading";
+    const sampleContent = "This is some sample content for the card.";
+    const sampleAudio = "path_to_sample_audio.mp3"; // Replace with an actual audio file path
+    const sampleUrl = "https://example.com";
+
+    var url = 'https://newsapi.org/v2/top-headlines?' +
+    'category=Technology&' +
+    'country=ca&' +
+    'pageSize=50&' + 
+    'apiKey= 92680690483a4092873a4584262298e6';
+
+    const reqOptions = {
+        method: 'GET',
+        mode: 'cors',
+    };
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -145,7 +163,17 @@ function Feed() {
 
     return (
         <div>
-            <h2>Feed here</h2>
+            <h2>Your Feed</h2>
+
+            <div className="cards-container">
+                <CardComponent
+                    heading={sampleHeading}
+                    content={sampleContent}
+                    audio={sampleAudio}
+                    url={sampleUrl}
+                />
+            </div>
+
             {/* Render your preferences or other components based on preferences */}
             <button className="signout-button" onClick={handleSignOut}>Signout</button>
             <h3>Comments:</h3>
@@ -157,6 +185,7 @@ function Feed() {
                 />
                 <button className="post-comment-button" onClick={postComment}>Post</button>
             </div>
+
 
             <div className="comments-section">
             {comments.map(comment => (
