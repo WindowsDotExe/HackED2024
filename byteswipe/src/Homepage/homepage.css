@@ -1,0 +1,52 @@
+@import url(https://fonts.googleapis.com/css?family=Exo+2:200i);
+
+/* CSS Centering Code with the h2 Selector "*" */ 
+
+
+h1 {
+    text-align: center;
+    font-size: 125px;
+    margin-bottom: 0%;
+}
+h2 {
+    margin-top: 5%;
+    text-align: center;
+
+    }
+    
+    body {
+      margin: auto;
+      width: 640px; 
+      padding: 10px;
+      font-family: 'Lexend Deca', sans-serif; 
+      color: #2E475D;    
+      background-color: #dcd6b4;
+    }
+
+
+button { 
+    margin: 20px 0;
+    padding: 15px 40px;
+    background-color: transparent;
+    border: 3px solid #2E475D;
+    border-radius: 10px;
+    color: #2E475D;
+    font-size: 24px;
+    font-family: 'Lexend Deca', sans-serif;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+    cursor: pointer;
+    box-shadow: 0 0 10px 2px#2E475D;
+  }
+
+.button-container{
+    margin-top: 15%;
+    display: flex;
+    justify-content: center;
+    gap : 160px;
+}
+      
+
