@@ -1,0 +1,36 @@
+.category-btn {
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: lightgray;
+    cursor: pointer;
+}
+
+.category-btn.selected {
+    background-color: blue;
+    color: white;
+}
+
+/* #nextButton {
+    margin-top: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+Existing styles... */
+
+#nextButton {
+    margin-top: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: lightgray; /* Default disabled state color */
+    color: darkgray;
+    border: none;
+    border-radius: 20px;
+}
+
+#nextButton:enabled {
+    background-color: blue; /* Highlighted color when enabled */
+    color: white;
+    cursor: pointer;
+}
