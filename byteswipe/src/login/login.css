@@ -1,8 +1,10 @@
+@import url(https://fonts.googleapis.com/css?family=Exo+2:200i);
+
 form {
     display: flex;
     flex-direction: column;
     width: 400px;
-    margin: auto;
+    margin-top: 20px;
 }
 
 div {
@@ -13,9 +15,10 @@ label {
     margin-bottom: 20px;
 }
 
+
 .header {
     text-align: center;
-    font-size: 50px;
+    font-size: 80px;
     margin-bottom: 0%;
     color: #2E475D;
     font-family: 'Lexend Deca', sans-serif;
@@ -23,30 +26,43 @@ label {
 
 h1 {
     text-align: center;
-    font-size: 125px;
+    font-size: 60px;
     margin-bottom: 0%;
     color: #2E475D;
     font-family: 'Lexend Deca', sans-serif;
 }
-body{
-    background-color: #dcd6b4;
 
-}
+body {
+    margin: auto;
+    width: 640px; 
+    padding: 10px;
+    font-family: 'Lexend Deca', sans-serif; 
+    color: #2E475D;    
+    background-color: #dcd6b4;
+  }
+
 input {
     padding: 12px;
     border: 1px solid #ddd;
     border-radius: 6px;
     margin: 10px 0;
+    font-family: 'Lexend Deca', sans-serif;
+}
+
+input:focus {
+    outline: none;
+    border-color: #2E475D;
+    box-shadow: 0 0 10px #2E475D;
 }
 
 button { 
-    margin: 20px 0;
-    padding: 15px 40px;
+    margin: 10px 0;
+    padding: 10px 30px;
     background-color: transparent;
     border: 3px solid #2E475D;
     border-radius: 10px;
     color: #2E475D;
-    font-size: 24px;
+    font-size: 20px;
     font-family: 'Lexend Deca', sans-serif;
     text-decoration: none;
     transition: all 0.2s ease-in-out;
@@ -58,8 +74,19 @@ button:hover {
   }
 
 .button-container{
-    margin-top: 15%;
+    margin-top: 5%;
     display: flex;
     justify-content: center;
     gap : 160px;
 } 
+
+
+.rounded-box {
+    border: 2px solid #ffffff; /* Border color similar to other elements */
+    border-radius: 15px; /* Rounded corners */
+    padding: 35px; /* Padding inside the box */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
+    background-color: #bab59a; /* Background color */
+    margin-top: 85px; /* Margin at the top */
+}
+
