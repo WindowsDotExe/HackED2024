@@ -29,8 +29,13 @@ function Homepage() {
                 <button onClick={navigateToRegister}>Register</button>
                 <button onClick={navigateToLogin}>Login</button>
             </div>
-        
+
+            <nav class="menu">
+
+            </nav>
         </div>
+
+        
     );
     }
 
