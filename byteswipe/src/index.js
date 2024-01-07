@@ -5,6 +5,8 @@ import './index.css';
 import Login from './login/login';
 import Homepage from './Homepage/homepage';
 import RegisterPage from './Registerpage/Register';
+import SignupPreferences from './signup-preferences/SignupPreferences';
+import Feed from './feed/feed';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -15,6 +17,8 @@ root.render(
         <Route path="/" element={<Homepage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/signup-preferences" element={<SignupPreferences />} />
+        <Route path="/feed" element={<Feed />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
